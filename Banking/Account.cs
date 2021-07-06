@@ -17,7 +17,7 @@ namespace Banking
             } else
             Balance += Amount;
         }
-        public void Withdraw(decimal Amount) {
+        public virtual void Withdraw(decimal Amount) {
             if (Amount <= 0) {
                 throw new Exception("Amount must be greater than zero.");
             } if (Amount > Balance) {
@@ -26,6 +26,11 @@ namespace Banking
             }
             else
                 Balance -= Amount;
+        }
+
+        public static void Transfer(decimal Amount, Account FromAccount, Account ToAccount) {
+            FromAccount.Withdraw(Amount);
+            ToAccount.Deposit(Amount);
         }
 
     }
